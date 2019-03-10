@@ -10,10 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_10_164213) do
+ActiveRecord::Schema.define(version: 2019_03_10_213951) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "contacts", force: :cascade do |t|
+    t.string "name"
+    t.string "phone"
+    t.string "email"
+    t.string "position"
+    t.bigint "lead_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["lead_id"], name: "index_contacts_on_lead_id"
+  end
 
   create_table "lead_statuses", force: :cascade do |t|
     t.string "name"
@@ -61,6 +72,7 @@ ActiveRecord::Schema.define(version: 2019_03_10_164213) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "contacts", "leads"
   add_foreign_key "leads", "lead_statuses"
   add_foreign_key "leads", "sales_funnel_stages"
   add_foreign_key "leads", "users"
