@@ -2,6 +2,7 @@ class Lead < ApplicationRecord
   belongs_to :user, optional: true
   belongs_to :sales_funnel_stage
   belongs_to :lead_status
+  has_many :contacts
   before_create :set_lead_status
   before_create :set_sales_funnel_stage
 
