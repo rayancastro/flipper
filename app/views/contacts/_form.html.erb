@@ -1,0 +1,13 @@
+<%= simple_form_for @contact do |f| %>
+  <%= f.input :name, label: "Nome do Contato" %>
+  <%= f.input :phone, label: "Telefone" %>
+  <%= f.input :email, label: "Email" %>
+  <%= f.input :lead_id, collection: Lead.all, label_method: lambda {|t| t.business_name}, label: "Lead associado" %>
+  <%= f.input :position, label: "Cargo" %>
+
+  <% unless @contact.id %>
+    <%= f.submit "Criar contato", class: "btn btn-primary" %>
+  <% else %>
+    <%= f.submit "Editar contato", class: "btn btn-primary" %>
+  <% end %>
+<% end %>
