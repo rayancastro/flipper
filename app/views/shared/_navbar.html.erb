@@ -1,8 +1,11 @@
 <% links_left = { 
                 } %>
 
-<% links_right = { "A Empresa" => root_path(anchor: 'empresa'),
-                   "Equipe" => root_path(anchor: 'equipe')
+<% links_right = { "Leads" => leads_path,
+                   "Atividades" => root_path,
+                   "Contatos" => root_path,
+                   "Progresso" => root_path,
+                   "Painel de Controle" => root_path
                   } %>
 
 
@@ -21,11 +24,10 @@
       </div>
       <div class="nav-item-right">
         <!-- Links na lateral direita da navbar -->
+        <% if user_signed_in? %>
         <% links_right.each do |text, path| %>
           <%= link_to text, path, class: "navbar-links" %>
         <% end %>
-        <% if user_signed_in? %>
-          <%= link_to "Painel Admin", admin_path, class: "navbar-links" if current_user.admin? %>
           <%= link_to "Logout", destroy_user_session_path, class: "navbar-links", method: :delete %>
         <% else %>
           <%= link_to t(".sign_in", default: "Login"), new_user_session_path, class: "navbar-links" %>
@@ -42,7 +44,9 @@
          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
           <!-- Login / Logout links -->
              <% if user_signed_in? %>
-                <%= link_to "Painel Admin", admin_path, class: "dropdown-item" if current_user.admin? %>
+                <% links_right.each do |text, path| %>
+                  <%= link_to text, path, class: "dropdown-item" %>
+                <% end %>
                 <%= link_to "Logout", destroy_user_session_path, class: "dropdown-item", method: :delete %>
             <% else %>
                 <%= link_to t(".sign_in", default: "Login"), new_user_session_path, class: "dropdown-item" %>
@@ -54,9 +58,6 @@
               <%= link_to text, path, class: "dropdown-item" %>
             <% end %>
             <div class="dropdown-divider"></div>
-            <% links_right.each do |text, path| %>
-              <%= link_to text, path, class: "dropdown-item" %>
-            <% end %>
         </div>
       </div>
     </div>
