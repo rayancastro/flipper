@@ -30,4 +30,5 @@ group :development, :test do
   gem 'pry-rails'
   gem 'listen', '~> 3.0.5'
   gem 'dotenv-rails'
+  gem 'faker'
 end
