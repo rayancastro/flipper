@@ -1,0 +1,11 @@
+<h1>Nome: <%= @lead.business_name %></h1>
+<p>Estágio: <%= @lead.sales_funnel_stage.name %></p>
+
+<%= link_to edit_lead_path(@lead.id), class: "edit-icon" do %>
+  <i class="fas fa-edit"></i>
+<% end %>
+<%= link_to lead_path(@lead.id), method: :delete, class: "delete-icon", onclick: "if (!confirm('Você tem certeza que deseja deletar?')) { return false }" do %>
+  <i class="fas fa-trash-alt"></i>
+<% end %>
+
+<%= link_to 'Voltar', leads_path, class: "btn btn-primary" %>

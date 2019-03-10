@@ -1,0 +1,15 @@
+<%= link_to 'Adicionar Lead', new_lead_path, class: 'btn btn-primary' %> 
+
+
+<h1>Leads:</h1>
+<ul>
+<% @leads.each do |lead| %>
+  <li>
+    <%= link_to lead_path(lead) do %>
+      <p>Nome: <%= lead.business_name %></p>
+    <% end %>
+      <p>Estágio: <%= lead.sales_funnel_stage.name %></p>
+  </li>
+<% end %>
+
+</ul>
