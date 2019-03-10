@@ -1,6 +1,19 @@
 <h1>Nome: <%= @lead.business_name %></h1>
 <p>Estágio: <%= @lead.sales_funnel_stage.name %></p>
 
+<h3>Contatos:</h3>
+<ul>
+  <% @lead.contacts.each do |contact| %>
+    <li>
+      <%= link_to contact_path(contact) do %>
+        <p>Nome: <%= contact.name %></p>
+      <% end %>
+    </li>
+  <% end %>
+</ul>
+
+<%= link_to 'Adicionar contato', new_contact_path(lead_id: @lead), class: "btn btn-primary" %>
+
 <%= link_to edit_lead_path(@lead.id), class: "edit-icon" do %>
   <i class="fas fa-edit"></i>
 <% end %>
