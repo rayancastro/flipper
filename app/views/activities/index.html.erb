@@ -1,0 +1,16 @@
+<%= link_to 'Adicionar Atividade', new_activity_path, class: 'btn btn-primary' %> 
+
+
+<h1>Atividades:</h1>
+<ul>
+<% @activities.each do |activity| %>
+  <li>
+    <%= link_to activity_path(activity) do %>
+      <p><%= activity.title %></p>
+      <p><%= activity.description %></p>
+      <p><%= activity.date %></p>
+    <% end %>
+  </li>
+<% end %>
+
+</ul>

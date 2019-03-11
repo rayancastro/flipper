@@ -6,4 +6,10 @@ class PagesController < ApplicationController
       redirect_to leads_path
     end
   end
+
+  def control_panel
+  end
+
+  def challenges
+  end
 end

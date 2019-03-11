@@ -1,0 +1,12 @@
+<h1><%= @activity.title %></h1>
+<p><%= @activity.description %></p>
+<p><%= @activity.date %></p>
+
+<%= link_to edit_activity_path(@activity), class: "edit-icon" do %>
+  <i class="fas fa-edit"></i>
+<% end %>
+<%= link_to activity_path(@activity), method: :delete, class: "delete-icon", onclick: "if (!confirm('Você tem certeza que deseja deletar?')) { return false }" do %>
+  <i class="fas fa-trash-alt"></i>
+<% end %>
+
+<%= link_to 'Voltar', activities_path, class: "btn btn-primary" %>

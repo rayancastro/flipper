@@ -1,0 +1,13 @@
+<h4>Adicionar nova atividade:</h4>
+<%= simple_form_for @activity do |f| %>
+  <%= f.input :title, label: "Título" %>
+  <%= f.input :description, label: "Descrição" %>
+  <%= f.input :date, as: :datetime, label: "Data e Horário" %>
+  <%= f.input :lead_id, collection: Lead.all, label_method: lambda {|t| t.business_name}, label: "Lead associado" %>
+  <% if @activity.lead %>
+    <%= f.input :contact_id, collection: @activity.lead.contacts, label: "Contato" %>
+  <% else %>
+    <%= f.input :contact_id, collection: Contact.all, label: "Contato" %>
+  <% end %>
+  <%= f.submit "Criar atividade", class: "btn btn-primary" %>
+<% end %>
