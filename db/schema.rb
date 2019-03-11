@@ -10,10 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_10_213951) do
+ActiveRecord::Schema.define(version: 2019_03_10_225921) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "activities", force: :cascade do |t|
+    t.string "title"
+    t.string "description"
+    t.bigint "user_id"
+    t.bigint "contact_id"
+    t.bigint "lead_id"
+    t.datetime "date"
+    t.boolean "done", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["contact_id"], name: "index_activities_on_contact_id"
+    t.index ["lead_id"], name: "index_activities_on_lead_id"
+    t.index ["user_id"], name: "index_activities_on_user_id"
+  end
 
   create_table "contacts", force: :cascade do |t|
     t.string "name"
@@ -51,6 +66,16 @@ ActiveRecord::Schema.define(version: 2019_03_10_213951) do
     t.index ["user_id"], name: "index_leads_on_user_id"
   end
 
+  create_table "notes", force: :cascade do |t|
+    t.text "description"
+    t.bigint "user_id"
+    t.bigint "lead_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["lead_id"], name: "index_notes_on_lead_id"
+    t.index ["user_id"], name: "index_notes_on_user_id"
+  end
+
   create_table "sales_funnel_stages", force: :cascade do |t|
     t.string "name"
     t.integer "identifier"
@@ -72,8 +97,13 @@ ActiveRecord::Schema.define(version: 2019_03_10_213951) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "activities", "contacts"
+  add_foreign_key "activities", "leads"
+  add_foreign_key "activities", "users"
   add_foreign_key "contacts", "leads"
   add_foreign_key "leads", "lead_statuses"
   add_foreign_key "leads", "sales_funnel_stages"
   add_foreign_key "leads", "users"
+  add_foreign_key "notes", "leads"
+  add_foreign_key "notes", "users"
 end

@@ -6,6 +6,8 @@ class LeadsController < ApplicationController
   end
 
   def show
+    @note = Note.new
+    @activity = Activity.new
   end
 
   def new

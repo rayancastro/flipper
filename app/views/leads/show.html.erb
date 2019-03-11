@@ -1,4 +1,12 @@
-<h1>Nome: <%= @lead.business_name %></h1>
+<h1>Nome: <%= @lead.business_name %>
+<%= link_to edit_lead_path(@lead.id), class: "edit-icon" do %>
+  <i class="fas fa-edit"></i>
+<% end %>
+<%= link_to lead_path(@lead.id), method: :delete, class: "delete-icon", onclick: "if (!confirm('Você tem certeza que deseja deletar?')) { return false }" do %>
+  <i class="fas fa-trash-alt"></i>
+<% end %>
+</h1> 
+
 <p>Estágio: <%= @lead.sales_funnel_stage.name %></p>
 
 <h3>Contatos:</h3>
@@ -14,11 +22,53 @@
 
 <%= link_to 'Adicionar contato', new_contact_path(lead_id: @lead), class: "btn btn-primary" %>
 
-<%= link_to edit_lead_path(@lead.id), class: "edit-icon" do %>
-  <i class="fas fa-edit"></i>
+<h3>Notas:</h3>
+
+<ul>
+  <% @lead.notes.each do |note| %>
+    <li>
+      <p><%= note.description %></p>
+      <p><%= note.user.name %></p>
+      <p><%= note.created_at %></p>
+    </li>
+  <% end %>
+</ul>
+
+<h4>Adicionar nova nota:</h4>
+<%= simple_form_for @note do |f| %>
+  <%= f.input :description, label: "Nota" %>
+  <%= f.input :lead_id, as: :hidden, input_html: { value: @lead.id } %>
+
+  <%= f.submit "Criar nota", class: "btn btn-primary" %>
 <% end %>
-<%= link_to lead_path(@lead.id), method: :delete, class: "delete-icon", onclick: "if (!confirm('Você tem certeza que deseja deletar?')) { return false }" do %>
-  <i class="fas fa-trash-alt"></i>
+
+
+<h3>Atividades:</h3>
+
+<ul>
+  <% @lead.activities.each do |activity| %>
+    <li>
+      <%= link_to activity_path(activity) do %>
+        <p><%= activity.title %></p>
+        <p><%= activity.description %></p>
+        <p><%= activity.date %></p>
+      <% end %>
+    </li>
+  <% end %>
+</ul>
+
+<h4>Adicionar nova atividade:</h4>
+<%= simple_form_for @activity do |f| %>
+  <%= f.input :title, label: "Título" %>
+  <%= f.input :description, label: "Descrição" %>
+  <%= f.input :contact_id, collection: @lead.contacts, label: "Contato" %>
+  <%= f.input :date, as: :datetime, label: "Data e Horário" %>
+  <%= f.input :lead_id, as: :hidden, input_html: { value: @lead.id } %>
+
+  <%= f.submit "Criar atividade", class: "btn btn-primary" %>
 <% end %>
+
+
+
 
 <%= link_to 'Voltar', leads_path, class: "btn btn-primary" %>
