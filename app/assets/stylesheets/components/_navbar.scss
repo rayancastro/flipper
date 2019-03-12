@@ -1,27 +1,27 @@
 .navbar {
-  height: 70px;
+  height: 100px;
   position: fixed;
   width: 100vw;
   padding: 0 40px;
   margin: 0;
   z-index: 500;
-  background-color: $main-color;
+  background-color: rgb(20, 20, 20);
   display: flex;
   align-items: center;
   justify-content: space-between;
   a {
     text-decoration: none;
     font-size: 0.8em;
-    background-color: $main-color;
+    color: rgb(245, 245, 245);
   }
 
   a:hover {
-    background-color: $main-color;
+    color: rgb(230, 230, 230);
   }
 }
 
 .nav-wrapper {
-  height: 70px;
+  height: 100px;
   width: 100vw;
 }
 
@@ -54,11 +54,10 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  }
+}
 
 .logo {
-  height: 40px;
-  margin-right: 16px;
+  height: 100px;
 }
 
 .navbar-links {
