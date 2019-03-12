@@ -55,20 +55,22 @@ end
 puts "You have #{SalesFunnelStage.count} sales funnel stages"
 
 
-puts "Generating Leads"
+unless Rails.env.production?
+  puts "Generating Leads"
 
-100.times do 
-name = Faker::Company.name
-Lead.create!( business_name: name, 
-              revenue_cents: 0,
-              closure_date: Time.now - rand(-30..30).days,
-              sales_funnel_stage: SalesFunnelStage.all.sample, 
-              lead_status: LeadStatus.all.sample, 
-              website: "#{name}.com".gsub(" ", "").downcase, 
-              address: Faker::Address.street_address, 
-              city: "São Paulo", 
-              state: "SP"
-              )
+  100.times do 
+  name = Faker::Company.name
+  Lead.create!( business_name: name, 
+                revenue_cents: 0,
+                closure_date: Time.now - rand(-30..30).days,
+                sales_funnel_stage: SalesFunnelStage.all.sample, 
+                lead_status: LeadStatus.all.sample, 
+                website: "#{name}.com".gsub(" ", "").downcase, 
+                address: Faker::Address.street_address, 
+                city: "São Paulo", 
+                state: "SP"
+                )
+  end
+
+  puts "You have #{Lead.count} leads"
 end
-
-puts "You have #{Lead.count} leads"
