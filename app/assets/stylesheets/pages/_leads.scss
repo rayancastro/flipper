@@ -20,6 +20,14 @@
   border: 1px solid rgb(220, 220, 220);
 }
 
+.stage-body {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  border: 1px solid rgb(220, 220, 220);
+}
+
 .stage-header {
   padding: 16px;
   display: flex;
@@ -38,4 +46,10 @@
 
 .won-lead {
   background-color: #a1dd70;
+}
+
+#div1 {
+  background-color: blue;
+  height: 500px;
+  width: 500px;
 }

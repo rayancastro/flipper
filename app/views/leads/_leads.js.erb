@@ -1,0 +1,57 @@
+const changeFunnelStage = (leadId, stageIdentifier) => {
+  console.log(leadId)
+  console.log(stageIdentifier)
+  $.ajax({
+    url: `/change_lead_stage`,
+    data: {
+      "lead_id": `${leadId}`,
+      "stage_identifier": `${stageIdentifier}`
+    },
+    dataType: "json",
+    type: "POST",
+    success: function (data) {
+      console.log('success');
+    },
+    error: function (data) {
+      console.log(data.errors);
+    }
+  });
+}
+
+const drag_start_handler = (event) => {
+  /* Set data */
+  console.log('drag')
+  event.dataTransfer.effectAllowed = 'move';
+  event.dataTransfer.dropEffect = "move"
+  event.dataTransfer.setData('text/plain', event.target.id);
+  console.log(event.dataTransfer.getData('text/plain'));
+  
+}
+
+const ondrop_handler = (event) => {
+  console.log("drop");
+  var leadCardId = event.dataTransfer.getData("text");
+  var leadCard = document.getElementById(leadCardId)
+  var stageZone = event.currentTarget;
+  var firstCard = stageZone.firstChild;
+
+  stageZone.insertBefore(leadCard, firstCard);
+  changeFunnelStage(leadCard.dataset["lead_id"], stageZone.dataset["identifier"])
+  event.preventDefault();
+}
+
+const dragover_handler = (event) => {
+  event.dataTransfer.dropEffect = "move"
+  event.preventDefault();
+}
+
+
+
+
+const leadCards = document.getElementsByClassName("lead-card")
+const stageZones = document.getElementsByClassName("stage-body")
+
+for (var i = 0; i < leadCards.length; i++) {
+  leadCards[i].addEventListener('dragstart', drag_start_handler, false);
+}
+

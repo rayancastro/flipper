@@ -5,6 +5,22 @@ class LeadsController < ApplicationController
     @leads = Lead.all
   end
 
+  def change_lead_stage
+    @lead = Lead.find(params[:lead_id])
+    @stage = SalesFunnelStage.find_by(identifier: params[:stage_identifier])
+    @lead.sales_funnel_stage = @stage
+
+    if @lead.save
+      respond_to do |format|
+        format.json { render json: { lead_id: @lead.id }, status: 200 }
+      end
+    else
+      respond_to do |format|
+        format.json { render json: { lead_id: @lead.id }, status: 410 }
+      end
+    end
+  end
+
   def show
     @note = Note.new
     @activity = Activity.new

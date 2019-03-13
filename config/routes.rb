@@ -4,9 +4,11 @@ Rails.application.routes.draw do
   root to: 'pages#home'
 
   resources :leads
+  post '/change_lead_stage', to: "leads#change_lead_stage"
   resources :contacts
   resources :activities
   resources :notes, only: [:create, :destroy]
+
 
   get '/challenges', to: 'pages#challenges'
   get '/control_panel', to: 'pages#control_panel'

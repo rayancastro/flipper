@@ -13,16 +13,19 @@
           <p><%= funnel_stage.name %></p>
         </div>
 
-        <% @leads.where(sales_funnel_stage: funnel_stage).each do |lead| %>
+        <div class="stage-body" ondrop="ondrop_handler(event)" ondragover="dragover_handler(event)" data-identifier="<%= funnel_stage.identifier %>">
 
-          <%= link_to lead_path(lead) do %>
-              <div class="lead-card <%= "lost-lead" if lead.lost? %> <%= "won-lead" if lead.won? %>">
+          <% @leads.where(sales_funnel_stage: funnel_stage).each do |lead| %>
+
+            <div id="lead-<%= lead.id %>" draggable="true" data-lead_id="<%= lead.id %>"class="lead-card <%= "lost-lead" if lead.lost? %> <%= "won-lead" if lead.won? %>">
+              <%= link_to lead_path(lead) do %>
                 <p>Nome: <%= lead.business_name %></p>
-              </div>  
+              <% end %>
+            </div>  
+
           <% end %>
 
-        <% end %>
-
+        </div>
       </div>
     <% end %>
 
@@ -30,7 +33,11 @@
 </div>
 
 
-
+<% content_for(:after_js) do %>
+  <%= javascript_tag do %>
+    <%= render(:partial => 'leads', :handlers => [:erb], :formats => [:js]) %>
+  <% end %>
+<% end %>
 
 
 
