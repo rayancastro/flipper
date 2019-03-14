@@ -1,3 +1,12 @@
+.stage-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 100%;
+  background-color: rgb(160, 160, 160);
+
+}
+
 .lead-card {
   padding: 16px;
   background-color: white;
@@ -22,6 +31,7 @@
 
 .stage-body {
   width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -46,10 +56,4 @@
 
 .won-lead {
   background-color: #a1dd70;
-}
-
-#div1 {
-  background-color: blue;
-  height: 500px;
-  width: 500px;
 }

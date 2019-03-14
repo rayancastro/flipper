@@ -2,7 +2,7 @@ class LeadsController < ApplicationController
   before_action :set_lead, only: [:show, :edit, :update, :destroy]
   
   def index
-    @leads = Lead.all
+    @leads = Lead.all.order(updated_at: :desc)
   end
 
   def change_lead_stage

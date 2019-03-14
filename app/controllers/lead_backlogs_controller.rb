@@ -1,0 +1,2 @@
+class LeadBacklogsController < ApplicationController
+end
