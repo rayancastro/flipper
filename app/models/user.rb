@@ -16,7 +16,7 @@ class User < ApplicationRecord
   	self.admin
   end
 
-  def closer?
+  def account_manager?
     self.account_manager
   end
 
@@ -31,8 +31,15 @@ class User < ApplicationRecord
     while self.experience_points >= experience_table[self.level + 1]
       self.level += 1
     end
-    self.save
-    puts "User leveled up to level #{self.level}!" if self.level != previous_level
+
+    if self.level != previous_level
+      self.save
+      puts "#{self.name} leveled up to level #{self.level}!" 
+      return true
+    else
+      puts "#{self.name} ainda precisa de #{experience_table[self.level + 1] - self.experience_points} pontos de experiencia para atingir o nível #{level + 1}."
+      return false
+    end
   end
 
   def self.experience_table
@@ -44,7 +51,7 @@ class User < ApplicationRecord
       total_xp += level_up_ammount
       levels[level] = total_xp
     end
-    
+
     levels
   end
 end

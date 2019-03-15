@@ -57,3 +57,22 @@
 .won-lead {
   background-color: #a1dd70;
 }
+
+.section-title {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 1.5rem;
+  line-height: 3.75rem;
+  flex: 0;
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.section-title::after {
+  content: '';
+  flex-grow: 1;
+  margin-left: .625rem;
+  border-top: 2px solid #e5e5e5;
+}
