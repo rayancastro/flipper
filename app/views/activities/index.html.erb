@@ -2,19 +2,38 @@
   <div>
     <%= render 'shared/sidebar' %>
   </div>
-  <div>
-    <%= link_to 'Adicionar Atividade', new_activity_path, class: 'btn btn-primary' %>
+  <div class="container">
+
     <h1>Atividades:</h1>
-    <ul>
-    <% @activities.each do |activity| %>
-      <li>
-        <%= link_to activity_path(activity) do %>
-          <p><%= activity.title %></p>
-          <p><%= activity.description %></p>
-          <p><%= activity.date %></p>
-        <% end %>
-      </li>
+
+    <%= link_to 'Adicionar Atividade', new_activity_path, class: 'btn btn-primary' %>
+    <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Cod. Cliente</th>
+      <th scope="col">Descrição</th>
+      <th scope="col">Data</th>
+      <th scope="col">Concluído</th>
+    </tr>
+  </thead>
+   <tbody>
+
+<% @activities.each do |activity| %>
+  <tr>
+    <%= link_to activity_path(activity) do %>
+
+      <td scope="row"><%= activity.user_id %></td>
+      <td><%= activity.description %></td>
+      <td><%= activity.date %></td>
+      <td><%= activity.done %></td>
+
     <% end %>
-    </ul>
+      </tr>
+<% end %>
+
+     </tbody>
+    </table>
   </div>
 </div>
+
+
