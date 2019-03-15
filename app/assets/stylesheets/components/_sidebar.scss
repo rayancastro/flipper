@@ -1,0 +1,23 @@
+.sidebox {
+  text-align: center;
+  color: white;
+  width: 240px;
+  height: calc(100vh - 180px);
+  background: grey;
+}
+
+.sidebar-avatar {
+  margin: 16px;
+  width: 120px;
+  height: auto;
+  border-radius: 50%;
+}
+
+.sidebar-link {
+
+}
+
+.fullbox {
+  display: grid;
+  grid-template-columns: 1fr 7fr;
+}
