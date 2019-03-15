@@ -1,0 +1,34 @@
+.sidebox {
+  text-align: center;
+  color: white;
+  width: 240px;
+  min-height: 100%;
+  background: $gray;
+  a {
+    color: $light-gray;
+  }
+  p:last-of-type {
+    margin-bottom: 0;
+    padding-bottom: 16px;
+  }
+  div {
+    padding-top: 8px;
+  }
+  div:hover {
+    transition: 0.3s;
+    background: $light-gray;
+    color: black;
+  }
+}
+
+.sidebar-avatar {
+  margin: 16px;
+  width: 120px;
+  height: auto;
+  border-radius: 50%;
+}
+
+.fullbox {
+  display: grid;
+  grid-template-columns: 1fr 7fr;
+}
