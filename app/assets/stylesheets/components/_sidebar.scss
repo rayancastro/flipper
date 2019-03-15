@@ -3,10 +3,21 @@
   color: white;
   width: 240px;
   min-height: 100%;
-  background: grey;
+  background: $gray;
+  a {
+    color: $light-gray;
+  }
   p:last-of-type {
     margin-bottom: 0;
     padding-bottom: 16px;
+  }
+  div {
+    padding-top: 8px;
+  }
+  div:hover {
+    transition: 0.3s;
+    background: $light-gray;
+    color: black;
   }
 }
 
@@ -15,10 +26,6 @@
   width: 120px;
   height: auto;
   border-radius: 50%;
-}
-
-.sidebar-link {
-
 }
 
 .fullbox {
