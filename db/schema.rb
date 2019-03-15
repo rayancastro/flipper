@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_10_225921) do
+ActiveRecord::Schema.define(version: 2019_03_14_232951) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,6 +41,45 @@ ActiveRecord::Schema.define(version: 2019_03_10_225921) do
     t.index ["lead_id"], name: "index_contacts_on_lead_id"
   end
 
+  create_table "goal_types", force: :cascade do |t|
+    t.string "name"
+    t.integer "duration"
+    t.integer "identifier"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "goals", force: :cascade do |t|
+    t.bigint "user_id"
+    t.integer "current_revenue_cents", default: 0, null: false
+    t.string "current_revenue_currency", default: "BRL", null: false
+    t.integer "total_revenue_cents", default: 0, null: false
+    t.string "total_revenue_currency", default: "BRL", null: false
+    t.integer "current_mqls"
+    t.integer "total_mqls"
+    t.date "start_date"
+    t.date "end_date"
+    t.boolean "closed"
+    t.bigint "goal_type_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["goal_type_id"], name: "index_goals_on_goal_type_id"
+    t.index ["user_id"], name: "index_goals_on_user_id"
+  end
+
+  create_table "lead_backlogs", force: :cascade do |t|
+    t.bigint "lead_id"
+    t.bigint "user_id"
+    t.integer "previous_stage_id"
+    t.integer "new_stage_id"
+    t.integer "revenue_cents", default: 0, null: false
+    t.string "revenue_currency", default: "BRL", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["lead_id"], name: "index_lead_backlogs_on_lead_id"
+    t.index ["user_id"], name: "index_lead_backlogs_on_user_id"
+  end
+
   create_table "lead_statuses", force: :cascade do |t|
     t.string "name"
     t.integer "identifier"
@@ -50,7 +89,6 @@ ActiveRecord::Schema.define(version: 2019_03_10_225921) do
 
   create_table "leads", force: :cascade do |t|
     t.string "business_name"
-    t.integer "revenue_cents"
     t.date "closure_date"
     t.bigint "user_id"
     t.bigint "sales_funnel_stage_id"
@@ -61,6 +99,7 @@ ActiveRecord::Schema.define(version: 2019_03_10_225921) do
     t.string "state"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "revenue_cents", default: 0, null: false
     t.index ["lead_status_id"], name: "index_leads_on_lead_status_id"
     t.index ["sales_funnel_stage_id"], name: "index_leads_on_sales_funnel_stage_id"
     t.index ["user_id"], name: "index_leads_on_user_id"
@@ -93,6 +132,9 @@ ActiveRecord::Schema.define(version: 2019_03_10_225921) do
     t.datetime "updated_at", null: false
     t.string "name"
     t.boolean "admin", default: false, null: false
+    t.integer "experience_points", default: 0, null: false
+    t.integer "level", default: 1, null: false
+    t.boolean "account_manager", default: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -101,6 +143,10 @@ ActiveRecord::Schema.define(version: 2019_03_10_225921) do
   add_foreign_key "activities", "leads"
   add_foreign_key "activities", "users"
   add_foreign_key "contacts", "leads"
+  add_foreign_key "goals", "goal_types"
+  add_foreign_key "goals", "users"
+  add_foreign_key "lead_backlogs", "leads"
+  add_foreign_key "lead_backlogs", "users"
   add_foreign_key "leads", "lead_statuses"
   add_foreign_key "leads", "sales_funnel_stages"
   add_foreign_key "leads", "users"

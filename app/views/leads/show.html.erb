@@ -1,3 +1,5 @@
+<div class="container">
+
 <h1>Nome: <%= @lead.business_name %>
 <%= link_to edit_lead_path(@lead.id), class: "edit-icon" do %>
   <i class="fas fa-edit"></i>
@@ -8,6 +10,71 @@
 </h1> 
 
 <p>Estágio: <%= @lead.sales_funnel_stage.name %></p>
+
+<ul class="nav nav-tabs lavalamp mb-2" id="myTab" role="tablist">
+  <div class="lavalamp-object ease" style="transition-duration: 0.2s; width: 139.656px; height: 40px; transform: translate(128.141px, 0px);">
+  </div>
+  <li class="nav-item lavalamp-item" style="z-index: 5; position: relative;">
+    <a class="nav-link show active" id="notas-tab" data-toggle="tab" href="#notas" role="tab" aria-controls="notas" aria-selected="true" onclick="return false">Notas</a>
+  </li>
+  <li class="nav-item lavalamp-item" style="z-index: 5; position: relative;">
+    <a class="nav-link show" id="atividades-tab" data-toggle="tab" href="#atividades" role="tab" aria-controls="atividades" aria-selected="false" onclick="return false">Atividades</a>
+  </li>
+</ul>
+
+<div class="tab-content" id="myTabContent">
+  <div class="tab-pane fade active show" id="notas" role="tabpanel" aria-labelledby="notas-tab">
+      <% @lead.notes.each do |note| %>
+        <div class="notification">
+          <img src='https://kitt.lewagon.com/placeholder/users/arthur-littm' class="avatar-large"/>
+          <div class="notification-content">
+            <p><small><%= note.user.name %> - <%= note.created_at.strftime('%m/%e/%y | %l:%M %p') %></small></p>
+            <p><%= note.description %></p>
+            <p><small></small></p>
+          </div>
+
+          <div class="notification-actions">
+            <%= link_to note_path(note), method: :delete do %>Delete <i class="far fa-trash-alt"></i><% end %>
+          </div>
+        </div>
+      <% end %>
+
+    <h5 class="section-title">Adicionar nova nota:</h5>
+    <%= simple_form_for @note do |f| %>
+      <%= f.input :description, label: "Nota" %>
+      <%= f.input :lead_id, as: :hidden, input_html: { value: @lead.id } %>
+
+      <%= f.submit "Criar nota", class: "btn btn-primary" %>
+    <% end %>
+
+  </div>
+  <div class="tab-pane fade" id="atividades" role="tabpanel" aria-labelledby="atividades-tab">
+    <ul>
+      <% @lead.activities.each do |activity| %>
+        <li>
+          <%= link_to activity_path(activity) do %>
+            <p><%= activity.title %></p>
+            <p><%= activity.description %></p>
+            <p><%= activity.date %></p>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+
+    <h4>Adicionar nova atividade:</h4>
+    <%= simple_form_for @activity do |f| %>
+      <%= f.input :title, label: "Título" %>
+      <%= f.input :description, label: "Descrição" %>
+      <%= f.input :contact_id, collection: @lead.contacts, label: "Contato" %>
+      <%= f.input :date, as: :datetime, label: "Data e Horário" %>
+      <%= f.input :lead_id, as: :hidden, input_html: { value: @lead.id } %>
+
+      <%= f.submit "Criar atividade", class: "btn btn-primary" %>
+    <% end %>
+
+  </div>
+</div>
+
 
 <h3>Contatos:</h3>
 <ul>
@@ -24,51 +91,16 @@
 
 <h3>Notas:</h3>
 
-<ul>
-  <% @lead.notes.each do |note| %>
-    <li>
-      <p><%= note.description %></p>
-      <p><%= note.user.name %></p>
-      <p><%= note.created_at %></p>
-    </li>
-  <% end %>
-</ul>
 
-<h4>Adicionar nova nota:</h4>
-<%= simple_form_for @note do |f| %>
-  <%= f.input :description, label: "Nota" %>
-  <%= f.input :lead_id, as: :hidden, input_html: { value: @lead.id } %>
-
-  <%= f.submit "Criar nota", class: "btn btn-primary" %>
-<% end %>
 
 
 <h3>Atividades:</h3>
 
-<ul>
-  <% @lead.activities.each do |activity| %>
-    <li>
-      <%= link_to activity_path(activity) do %>
-        <p><%= activity.title %></p>
-        <p><%= activity.description %></p>
-        <p><%= activity.date %></p>
-      <% end %>
-    </li>
-  <% end %>
-</ul>
 
-<h4>Adicionar nova atividade:</h4>
-<%= simple_form_for @activity do |f| %>
-  <%= f.input :title, label: "Título" %>
-  <%= f.input :description, label: "Descrição" %>
-  <%= f.input :contact_id, collection: @lead.contacts, label: "Contato" %>
-  <%= f.input :date, as: :datetime, label: "Data e Horário" %>
-  <%= f.input :lead_id, as: :hidden, input_html: { value: @lead.id } %>
-
-  <%= f.submit "Criar atividade", class: "btn btn-primary" %>
-<% end %>
 
 
 
 
 <%= link_to 'Voltar', leads_path, class: "btn btn-primary" %>
+
+</div>

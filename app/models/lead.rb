@@ -5,9 +5,12 @@ class Lead < ApplicationRecord
   has_many :contacts
   has_many :notes
   has_many :activities
-
+  has_many :lead_backlogs
+  
   before_create :set_lead_status
   before_create :set_sales_funnel_stage
+
+  monetize :revenue_cents
 
   def self.filter_by_identifier(identifier)
     self.joins(:sales_funnel_stage).where('sales_funnel_stages.identifier = ?', "#{identifier}")

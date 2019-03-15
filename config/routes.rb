@@ -8,6 +8,9 @@ Rails.application.routes.draw do
   resources :contacts
   resources :activities
   resources :notes, only: [:create, :destroy]
+  resources :lead_backlogs, only: [:index]
+  post 'create_goals_for_all', to: 'goals#create_goals_for_all' 
+  resources :goal_types, except: [:show]
 
 
   get '/challenges', to: 'pages#challenges'

@@ -1,3 +1,12 @@
+.stage-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 100%;
+  background-color: rgb(160, 160, 160);
+
+}
+
 .lead-card {
   padding: 16px;
   background-color: white;
@@ -22,6 +31,7 @@
 
 .stage-body {
   width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -48,8 +58,21 @@
   background-color: #a1dd70;
 }
 
-#div1 {
-  background-color: blue;
-  height: 500px;
-  width: 500px;
+.section-title {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 1.5rem;
+  line-height: 3.75rem;
+  flex: 0;
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.section-title::after {
+  content: '';
+  flex-grow: 1;
+  margin-left: .625rem;
+  border-top: 2px solid #e5e5e5;
 }
