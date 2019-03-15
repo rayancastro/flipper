@@ -132,9 +132,9 @@ ActiveRecord::Schema.define(version: 2019_03_14_232951) do
     t.datetime "updated_at", null: false
     t.string "name"
     t.boolean "admin", default: false, null: false
-    t.integer "experience_points"
-    t.integer "level"
-    t.boolean "closer"
+    t.integer "experience_points", default: 0, null: false
+    t.integer "level", default: 1, null: false
+    t.boolean "account_manager", default: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
