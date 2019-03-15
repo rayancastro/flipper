@@ -1,7 +1,18 @@
 puts "Cleaning database"
-  User.destroy_all
+  LeadBacklog.destroy_all
+  Goal.destroy_all
+  UserGoal.destroy_all
+  Note.destroy_all
+  Activity.destroy_all
+  puts "Destroing contacts"
+  Contact.destroy_all
+  puts "Destroing leads"
   Lead.destroy_all
+  puts "Destroing users"
+  User.destroy_all
+  puts "Destroing lead status"
   LeadStatus.destroy_all
+  puts "Destroing funnel stages"
   SalesFunnelStage.destroy_all
 puts "Done"
 
@@ -54,6 +65,16 @@ end
 
 puts "You have #{SalesFunnelStage.count} sales funnel stages"
 
+puts "Generating goals"
+
+[ { name: "Semanal", duration: 7, total_revenue: 3000, total_mqls: 10, start_date: Date.today },
+  { name: "Mensal", duration: 30, total_revenue: 12000, total_mqls: 40, start_date: Date.today },
+  { name: "Trimestral", duration: 90, total_revenue: 36000, total_mqls: 120, start_date: Date.today },
+].each do |params|
+  Goal.create!(params)
+end
+
+puts "You have #{Goal.count} goal types"
 
 unless Rails.env.production?
   puts "Generating Leads"

@@ -4,7 +4,8 @@ class User < ApplicationRecord
   has_many :lead_backlogs
   has_many :activities
   has_many :notes
-  has_many :goals
+  has_many :user_goals
+  has_many :goals, through: :user_goals
 
 
   # Include default devise modules. Others available are:
