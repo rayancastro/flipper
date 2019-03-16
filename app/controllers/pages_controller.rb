@@ -7,8 +7,7 @@ class PagesController < ApplicationController
     end
   end
 
-  def control_panel
-  end
+
 
   def challenges
   end

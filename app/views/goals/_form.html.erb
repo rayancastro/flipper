@@ -1,0 +1,14 @@
+<%= simple_form_for @goal do |f| %>
+  <%= f.input :name, label: "Nome" %>
+  <%= f.input :duration, label: "Duração (dias)" %>
+
+  <%= f.input :total_mqls, label: "MQLs a serem alcançados pelos SDRs" %>
+  <%= f.input :total_revenue, label: "Receita a ser alcançada pelos Closers" %>
+  <%= f.input :start_date, label: "Data de início" %>
+  
+  <% unless @goal.id %>
+    <%= f.submit "Criar Meta", class: "btn btn-primary" %>
+  <% else %>
+    <%= f.submit "Editar Meta", class: "btn btn-primary" %>
+  <% end %>
+<% end %>

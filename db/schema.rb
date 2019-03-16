@@ -41,30 +41,17 @@ ActiveRecord::Schema.define(version: 2019_03_15_233101) do
     t.index ["lead_id"], name: "index_contacts_on_lead_id"
   end
 
-  create_table "goal_types", force: :cascade do |t|
+  create_table "goals", force: :cascade do |t|
     t.string "name"
     t.integer "duration"
-    t.integer "identifier"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "goals", force: :cascade do |t|
-    t.bigint "user_id"
-    t.integer "current_revenue_cents", default: 0, null: false
-    t.string "current_revenue_currency", default: "BRL", null: false
     t.integer "total_revenue_cents", default: 0, null: false
     t.string "total_revenue_currency", default: "BRL", null: false
-    t.integer "current_mqls"
     t.integer "total_mqls"
     t.date "start_date"
     t.date "end_date"
-    t.boolean "closed"
-    t.bigint "goal_type_id"
+    t.boolean "closed", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["goal_type_id"], name: "index_goals_on_goal_type_id"
-    t.index ["user_id"], name: "index_goals_on_user_id"
   end
 
   create_table "lead_backlogs", force: :cascade do |t|
@@ -122,6 +109,18 @@ ActiveRecord::Schema.define(version: 2019_03_15_233101) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "user_goals", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "goal_id"
+    t.integer "current_revenue_cents", default: 0, null: false
+    t.string "current_revenue_currency", default: "BRL", null: false
+    t.integer "current_mqls", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["goal_id"], name: "index_user_goals_on_goal_id"
+    t.index ["user_id"], name: "index_user_goals_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -144,8 +143,6 @@ ActiveRecord::Schema.define(version: 2019_03_15_233101) do
   add_foreign_key "activities", "leads"
   add_foreign_key "activities", "users"
   add_foreign_key "contacts", "leads"
-  add_foreign_key "goals", "goal_types"
-  add_foreign_key "goals", "users"
   add_foreign_key "lead_backlogs", "leads"
   add_foreign_key "lead_backlogs", "users"
   add_foreign_key "leads", "lead_statuses"
@@ -153,4 +150,6 @@ ActiveRecord::Schema.define(version: 2019_03_15_233101) do
   add_foreign_key "leads", "users"
   add_foreign_key "notes", "leads"
   add_foreign_key "notes", "users"
+  add_foreign_key "user_goals", "goals"
+  add_foreign_key "user_goals", "users"
 end

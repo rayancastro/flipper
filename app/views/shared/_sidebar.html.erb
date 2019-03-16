@@ -1,18 +1,20 @@
 <div class="sidebox">
-  <%= image_tag "hamaji", class:"sidebar-avatar" %>
-  <h5>Nome</h5>
-    <p><%= current_user.name %></p>
   <div>
-    <h1>
-      <i class="fas fa-briefcase"></i>
-    </h1>
-    <p>Negócios</p>
+    <%= link_to user_profile_path do %>
+      <div class="avatar-box">
+        <%= image_tag "hamaji", class:"sidebar-avatar" %>
+          <p class="avatar-level"><%= current_user.level %></p>
+      </div>
+      <h5><%= current_user.name %></h5>
+    <% end %>
   </div>
   <div>
-    <h1>
-      <i class="fas fa-thumbs-up"></i>
-    </h1>
-    <p>Prospecções</p>
+    <%= link_to leads_path do %>
+      <h1>
+        <i class="fas fa-briefcase"></i>
+      </h1>
+      <p>Leads</p>
+    <% end %>
   </div>
   <div>
     <%= link_to activities_path do %>
@@ -35,15 +37,17 @@
       <h1>
         <i class="fas fa-trophy"></i>
       </h1>
-      <p>Conquistas</p>
+      <p>Progresso</p>
     <% end %>
   </div>
-  <div>
-    <%= link_to control_panel_path do %>
-      <h1>
-        <i class="fas fa-sliders-h"></i>
-      </h1>
-      <p>Configurações</p>
-    <% end %>
-  </div>
+  <% if current_user.admin? %>
+    <div>
+      <%= link_to goals_path do %>
+        <h1>
+          <i class="fas fa-sliders-h"></i>
+        </h1>
+        <p>Gestão de metas</p>
+      <% end %>
+    </div>
+  <% end %>
 </div>

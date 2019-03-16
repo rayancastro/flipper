@@ -9,11 +9,14 @@ Rails.application.routes.draw do
   resources :activities
   resources :notes, only: [:create, :destroy]
   resources :lead_backlogs, only: [:index]
-  post 'create_goals_for_all', to: 'goals#create_goals_for_all' 
-  resources :goal_types, except: [:show]
+  resources :goals, except: [:show] do 
+    post 'create_user_goals_for_all', to: 'goals#create_user_goals_for_all'
+    delete 'destroy_user_goals_for_all', to: 'goals#destroy_user_goals_for_all' 
+  end
 
+  resources :users, only: [:update]
 
   get '/challenges', to: 'pages#challenges'
-  get '/control_panel', to: 'pages#control_panel'
+  get '/user_profile', to: 'users#user_profile'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

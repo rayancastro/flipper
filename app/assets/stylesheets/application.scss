@@ -19,11 +19,16 @@ a {
   text-decoration: none;
   color: black;
   &:hover {
-  	color: rgb(60, 60, 60);
+    color: rgb(60, 60, 60);
+    text-decoration: none !important;
   }
 }
 
 html, body {
   max-width: 100%;
   overflow-x: hidden;
+}
+
+.fullbox>.container{
+  padding: 2%;
 }
