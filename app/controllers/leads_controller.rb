@@ -7,12 +7,19 @@ class LeadsController < ApplicationController
 
   def change_lead_stage
     @lead = Lead.find(params[:lead_id])
+    previous_stage = @lead.sales_funnel_stage
     @stage = SalesFunnelStage.find_by(identifier: params[:stage_identifier])
     @lead.sales_funnel_stage = @stage
 
-    if @lead.save
+    if @lead.save && (previous_stage != @lead.sales_funnel_stage)
+      @backlog = LeadBacklog.new(lead: @lead, user: current_user, previous_stage: previous_stage, new_stage: @lead.sales_funnel_stage, revenue: @lead.revenue)
+      if @backlog.save
+        @backlog.lead.user.gain_goals_points(@backlog)
+      else
+        flash['notice'] = "O lead #{@lead.business_name} já foi mudado para #{@lead.sales_funnel_stage.name} anteriormente."
+      end
       respond_to do |format|
-        format.json { render json: { lead_id: @lead.id }, status: 200 }
+        format.json { render json: { lead_id: @lead.id, backlog_id: @backlog.id }, status: 200 }
       end
     else
       respond_to do |format|
@@ -64,6 +71,6 @@ class LeadsController < ApplicationController
   end
 
   def lead_params
-    params.require(:lead).permit(:business_name, :revenue_cents, :closure_date, :user_id, :sales_funnel_stage_id, :lead_status_id, :website, :address, :city, :state)
+    params.require(:lead).permit(:business_name, :revenue, :closure_date, :user_id, :sales_funnel_stage_id, :lead_status_id, :website, :address, :city, :state)
   end
 end

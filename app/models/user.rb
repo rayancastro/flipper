@@ -44,6 +44,72 @@ class User < ApplicationRecord
     end
   end
 
+  def gain_experience(points)
+    self.experience_points += points
+    self.save
+    self.level_up
+  end
+
+  def gain_goals_points(backlog)
+    new_stage = backlog.new_stage
+    mql_counter = 0
+    sql_counter = 0
+    closure_counter = 0
+    revenue = 0
+
+    user_goal = self.user_goals.first
+    mql_exp = user_goal
+
+    case new_stage.identifier
+    when 3
+      mql_counter += 1
+    when 4
+      sql_counter += 1
+    when 8
+      closure_counter += 1
+      revenue += backlog.revenue
+    end
+
+    self.user_goals.each do |user_goal|
+      user_goal.current_revenue += revenue
+      user_goal.current_mqls += mql_counter
+    end
+
+    total_experience = (User.mql_exp * mql_counter) + (User.sql_exp * sql_counter) + (User.closure_exp(revenue) * closure_counter)
+    self.gain_experience(total_experience)
+  end
+
+  def self.mql_exp
+    goal = Goal.first
+    daily_exp_constant = 300
+    if goal
+      mql_per_day = goal.total_mqls / goal.duration.to_f
+      mql_exp = daily_exp_constant / mql_per_day
+      return mql_exp.round
+    else
+      return nil
+    end
+  end
+  
+  def self.sql_exp
+    sql_constant = 2.33
+    (self.mql_exp * sql_constant).round
+  end
+
+  def self.closure_exp(revenue)
+    revenue_cents = revenue.to_i*100
+    goal = Goal.first
+    daily_exp_constant = 500
+    if goal
+      revenue_cents_per_day = goal.total_revenue_cents / goal.duration.to_f
+      revenue_cents_exp = daily_exp_constant / revenue_cents_per_day
+      closure_exp = revenue_cents_exp * revenue_cents
+      return closure_exp.round
+    else
+      return nil
+    end
+  end
+
   def self.experience_table
     levels = {}
     total_xp = 0
