@@ -1,9 +1,8 @@
-<% links_left = { 
+<% links_left = {
                 } %>
 
-<% links_right = { 
+<% links_right = {
                   } %>
-
 
 
 <div class="nav-wrapper" id="nav-wrapper">
@@ -20,6 +19,10 @@
       </div>
       <div class="nav-item-right">
         <!-- Links na lateral direita da navbar -->
+        <div class="progress">
+  <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 10%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+</div>
+<progress value="70" max="100">70 %</progress>
         <% if user_signed_in? %>
         <% links_right.each do |text, path| %>
           <%= link_to text, path, class: "navbar-links" %>
