@@ -1,19 +1,22 @@
-<h1 class="text-center">Metas:</h1> <%= link_to 'Adicionar Meta', new_goal_path, class: 'btn btn-primary' %> 
-<ul>
-<% @goals.each do |goal| %>
-  <li>
-      <p>Nome: <%= goal.name %></p>
-      <p>Duração: <%= goal.duration %></p>
-      <p>MQLs a serem alcançados: <%= goal.total_mqls %></p>
-      <p>Receita a ser atingida: <%= humanized_money_with_symbol(goal.total_revenue) %></p>
-      <p>Data de Início: <%= goal.start_date %></p>
-      <p>Data de Fim: <%= goal.end_date %></p>
-      <p>Número de vendedores com a meta: <%= goal.user_goals.count %></p>
-      <p>Status: <%= goal.closed ? "Finalizada" : "Ativa" %></p>
+<div class="container">
+  <h1 class="text-center">Metas:</h1> 
+  <p class="text-center"><%= link_to 'Adicionar Meta', new_goal_path, class: 'btn btn-primary' %> </p>
+  <ul>
+  <% @goals.each do |goal| %>
+    <li>
+        <p>Nome: <%= goal.name %></p>
+        <p>Duração: <%= goal.duration %></p>
+        <p>MQLs a serem alcançados: <%= goal.total_mqls %></p>
+        <p>Receita a ser atingida: <%= humanized_money_with_symbol(goal.total_revenue) %></p>
+        <p>Data de Início: <%= goal.start_date %></p>
+        <p>Data de Fim: <%= goal.end_date %></p>
+        <p>Número de vendedores com a meta: <%= goal.user_goals.count %></p>
+        <p>Status: <%= goal.closed ? "Finalizada" : "Ativa" %></p>
 
-      <%= link_to 'Criar essa meta para todos os vendedores', goal_create_user_goals_for_all_path(goal.id), method: :post, class: 'btn btn-primary' %>
-      <%= link_to 'Deletar essa meta de todos os vendedores', goal_destroy_user_goals_for_all_path(goal.id), method: :delete, class: 'btn btn-primary' %> 
-  </li>
-<% end %>
+        <%= link_to 'Criar essa meta para todos os vendedores', goal_create_user_goals_for_all_path(goal.id), method: :post, class: 'btn btn-primary' %>
+        <%= link_to 'Deletar essa meta de todos os vendedores', goal_destroy_user_goals_for_all_path(goal.id), method: :delete, class: 'btn btn-primary' %> 
+    </li>
+  <% end %>
 
-</ul>
+  </ul>
+</div>
