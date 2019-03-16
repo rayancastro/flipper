@@ -26,7 +26,11 @@
   <div class="tab-pane fade active show" id="notas" role="tabpanel" aria-labelledby="notas-tab">
       <% @lead.notes.each do |note| %>
         <div class="notification">
-          <img src='https://kitt.lewagon.com/placeholder/users/arthur-littm' class="avatar-large"/>
+          <% if note.user.photo.url %>
+            <%= image_tag note.user.photo.url(:avatar), class:"avatar-large" %>
+          <% else %>
+            <%= image_tag "profile-placeholder.png", class:"avatar-large" %>
+          <% end %>
           <div class="notification-content">
             <p><small><%= note.user.name %> - <%= note.created_at.strftime('%m/%e/%y | %l:%M %p') %></small></p>
             <p><%= note.description %></p>

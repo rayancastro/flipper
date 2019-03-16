@@ -2,8 +2,8 @@
   <div>
     <%= link_to user_profile_path do %>
       <div class="avatar-box">
-        <% if current_user.photo %>
-          <%= image_tag current_user.photo.url(:bright_face), class:"sidebar-avatar" %>
+        <% if current_user.photo.url %>
+          <%= image_tag current_user.photo.url(:avatar), class:"sidebar-avatar" %>
         <% else %>
           <%= image_tag "profile-placeholder.png", class:"sidebar-avatar" %>
         <% end %>
