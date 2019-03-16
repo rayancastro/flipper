@@ -7,8 +7,4 @@ class PagesController < ApplicationController
     end
   end
 
-
-
-  def challenges
-  end
 end
