@@ -2,9 +2,14 @@
   <div class="d-flex">
 
   <h1>Progresso</h1>
-
-  <% @user.user_goals.each do |user_goal| %>
-    
-  <% end %>
+  <div class="level-box">
+    <div class="progress">
+      <div class="progress-bar progress-bar-striped" role="progressbar" style="width: <%= @progress %>%;" aria-valuenow="<%= @progress %>" aria-valuemin="0" aria-valuemax="100"></div>
+    </div>
+      <p class="navbar-level-left"><%= current_user.level %></p>
+      <p class="navbar-level-right"><%= current_user.level + 1 %></p>
   </div>
+  <% @user.user_goals.each do |user_goal| %>
+
+  <% end %>
 </div>
