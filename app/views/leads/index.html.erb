@@ -1,8 +1,8 @@
 
 <div class="leads-container">
-  <div class="header-bar">
-    <h1>Leads:</h1>
-    <%= link_to 'Adicionar Lead', new_lead_path, class: 'btn btn-primary' %> 
+  <div class="header-bar d-flex">
+    <h2>Leads:</h2>
+    <%= link_to 'Adicionar Lead', new_lead_path, class: 'btn btn-primary' %>
   </div>
 
   <div class="sales-funnel-wrapper">
@@ -23,7 +23,7 @@
                 <p><%= lead.business_name %></p>
                 <p><%= humanized_money_with_symbol(lead.revenue) %></p>
               <% end %>
-            </div>  
+            </div>
 
           <% end %>
 

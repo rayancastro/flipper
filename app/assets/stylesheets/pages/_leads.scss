@@ -7,6 +7,10 @@
 
 }
 
+.leads-container{
+  padding: 2%;
+}
+
 .lead-card {
   padding: 16px;
   background-color: white;
@@ -75,4 +79,10 @@
   flex-grow: 1;
   margin-left: .625rem;
   border-top: 2px solid #e5e5e5;
+}
+
+.d-flex{
+  justify-content: space-between;
+  align-items: space-around;
+  padding: 2% 0%;
 }
