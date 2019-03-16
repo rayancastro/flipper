@@ -1,0 +1,15 @@
+<div class="container">
+  <h1>Editar dados:</h1>
+
+  <%= simple_form_for @user do |f| %> 
+  <p>Posição: <%= @user.account_manager ? "Account Manager" : "SDR" %></p>
+  <%= f.input :email, label: "Email", disabled: true %>
+  <%= f.input :experience_points, label: "Pontos de experiência", disabled: true %>
+  <%= f.input :level, label: "Nível", disabled: true %>
+  <%= f.input :name, label: "Nome Completo" %>
+
+
+  <%= f.submit "Atualizar perfil", class: "btn btn-primary" %>
+
+<% end %>
+</div>

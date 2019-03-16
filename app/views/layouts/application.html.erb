@@ -16,10 +16,10 @@
     <%= render 'shared/flashes' %>
     <% if current_user %>
       <div class="fullbox">
+        <%= render 'shared/sidebar' %>
         <div>
-          <%= render 'shared/sidebar' %>
+          <%= yield %>
         </div>
-        <%= yield %>
       </div>
     <% else %>
       <%= yield %>

@@ -14,8 +14,9 @@ Rails.application.routes.draw do
     delete 'destroy_user_goals_for_all', to: 'goals#destroy_user_goals_for_all' 
   end
 
+  resources :users, only: [:update]
 
   get '/challenges', to: 'pages#challenges'
-  get '/control_panel', to: 'pages#control_panel'
+  get '/user_profile', to: 'users#user_profile'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
