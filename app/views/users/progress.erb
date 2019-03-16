@@ -9,7 +9,81 @@
       <p class="navbar-level-left"><%= current_user.level %></p>
       <p class="navbar-level-right"><%= current_user.level + 1 %></p>
   </div>
+  </div>
   <% @user.user_goals.each do |user_goal| %>
 
   <% end %>
+  <div class="row progress-cards">
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Suas pontuações</h5>
+         <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Nome</th>
+        <th scope="col">E-mail</th>
+        <th scope="col">Telefone</th>
+        <th scope="col">Posição</th>
+        <th scope="col">Lead Associado</th>
+      </tr>
+    </thead>
+    <tbody>
+    <tr>
+
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+
+        <td></td>
+    </tr>
+    </tbody>
+  </table>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Pontuação Geral</h5>
+         <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Nome</th>
+        <th scope="col">E-mail</th>
+        <th scope="col">Telefone</th>
+        <th scope="col">Posição</th>
+        <th scope="col">Lead Associado</th>
+      </tr>
+    </thead>
+    <tbody>
+    <tr>
+
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+
+        <td></td>
+    </tr>
+    </tbody>
+  </table>
+      </div>
+      <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Detalhe da Pontuação</h5>
+        <!-- https://codepen.io/JMChristensen/pen/Ablch-->
+        <div id="cont" data-pct="100">
+<svg id="svg" width="200" height="200" viewPort="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <circle r="90" cx="100" cy="100" fill="transparent" stroke-dasharray="565.48" stroke-dashoffset="0"></circle>
+  <circle id="bar" r="90" cx="100" cy="100" fill="transparent" stroke-dasharray="565.48" stroke-dashoffset="0"></circle>
+</svg>
+</div>
+<label for="percent">Type a percent!</label>
+<input id="percent" name="percent">
+      </div>
+    </div>
+  </div>
+</div>
 </div>
