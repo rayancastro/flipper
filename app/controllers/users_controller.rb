@@ -4,6 +4,10 @@ class UsersController < ApplicationController
     @user = current_user
   end
 
+  def progress
+    @user = current_user
+  end
+
   def update
     @user = User.find(params[:id])
     if @user.update(user_params)
