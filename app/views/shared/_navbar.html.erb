@@ -19,21 +19,24 @@
       </div>
       <div class="nav-item-right">
         <!-- Links na lateral direita da navbar -->
-        <div class="progress">
-  <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 10%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
-</div>
-<progress value="70" max="100">70 %</progress>
-        <% if user_signed_in? %>
-        <% links_right.each do |text, path| %>
-          <%= link_to text, path, class: "navbar-links" %>
-        <% end %>
-          <%= link_to "Logout", destroy_user_session_path, class: "navbar-links", method: :delete %>
-        <% else %>
-          <%= link_to t(".sign_in", default: "Login"), new_user_session_path, class: "navbar-links" %>
-          <%= link_to t(".sign_in", default: "Criar Conta"), new_user_registration_path, class: "navbar-links" %>
-        <% end %>
+    <% if user_signed_in? %>
+    <div class="level-box">
+      <div class="progress">
+        <div class="progress-bar progress-bar-striped" role="progressbar" style="width: <%= @progress %>%;" aria-valuenow="<%= @progress %>" aria-valuemin="0" aria-valuemax="100"></div>
       </div>
+      <p class="navbar-level-left"><%= current_user.level %></p>
+      <p class="navbar-level-right"><%= current_user.level + 1 %></p> 
     </div>
+      <% links_right.each do |text, path| %>
+        <%= link_to text, path, class: "navbar-links" %>
+      <% end %>
+        <%= link_to "Logout", destroy_user_session_path, class: "navbar-links", method: :delete %>
+      <% else %>
+      <%= link_to t(".sign_in", default: "Login"), new_user_session_path, class: "navbar-links" %>
+      <%= link_to t(".sign_in", default: "Criar Conta"), new_user_registration_path, class: "navbar-links" %>
+    <% end %>
+  </div>
+</div>
 
 
     <!-- Mobile dropdown list -->

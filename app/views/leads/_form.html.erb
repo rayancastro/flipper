@@ -1,6 +1,6 @@
 <%= simple_form_for @lead do |f| %>
   <%= f.input :business_name, label: "Nome da Empresa" %>
-  <%= f.input :revenue_cents, label: "Receita previsível" %>
+  <%= f.input :revenue, label: "Receita previsível" %>
   <%= f.input :closure_date, as: :date, label: "Data de fechamento" %>
   <%= f.input :user_id, collection: User.all, label: "Vendedor responsável" %>
   <%= f.input :sales_funnel_stage_id, collection: SalesFunnelStage.all, label: "Estágio do Funil" %>
