@@ -2,7 +2,11 @@
   <div>
     <%= link_to user_profile_path do %>
       <div class="avatar-box">
-        <%= image_tag "hamaji", class:"sidebar-avatar" %>
+        <% if current_user.photo %>
+          <%= image_tag current_user.photo.url(:bright_face), class:"sidebar-avatar" %>
+        <% else %>
+          <%= image_tag "profile-placeholder.png", class:"sidebar-avatar" %>
+        <% end %>
           <p class="avatar-level"><%= current_user.level %></p>
       </div>
       <h5><%= current_user.name %></h5>
