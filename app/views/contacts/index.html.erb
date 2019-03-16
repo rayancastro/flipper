@@ -1,15 +1,29 @@
 <div class="container">
   <%= link_to 'Adicionar Contato', new_contact_path, class: 'btn btn-primary' %>
   <h1>Contatos:</h1>
-  <ul>
+    <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Nome</th>
+        <th scope="col">E-mail</th>
+        <th scope="col">Telefone</th>
+        <th scope="col">Posição</th>
+        <th scope="col">Lead Associado</th>
+      </tr>
+    </thead>
+    <tbody>
   <% @contacts.each do |contact| %>
-    <li>
+    <tr>
       <%= link_to contact_path(contact) do %>
-        <p>Nome: <%= contact.name %></p>
+        <td><%= contact.name %></td>
+        <td><%= contact.email %></td>
+        <td><%= contact.phone %></td>
+        <td><%= contact.position %></td>
       <% end %>
-        <p>Lead Associado: <%= contact.lead.business_name if contact.lead %></p>
-    </li>
-  <% end %>
-  </ul>
+        <td><%= contact.lead.business_name if contact.lead %></td>
+    </tr>
+      <% end %>
+    </tbody>
+  </table>
 </div>
 
