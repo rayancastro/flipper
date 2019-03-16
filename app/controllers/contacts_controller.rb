@@ -9,7 +9,11 @@ class ContactsController < ApplicationController
   end
 
   def new
-    @contact = Contact.new(lead: Lead.find(params[:lead_id]))
+    if params[:lead_id]
+      @contact = Contact.new(lead: Lead.find(params[:lead_id]))
+    else
+      @contact = Contact.new
+    end
   end
 
   def create
