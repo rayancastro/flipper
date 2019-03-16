@@ -7,6 +7,7 @@ class User < ApplicationRecord
   has_many :user_goals
   has_many :goals, through: :user_goals
 
+  mount_uploader :photo, PhotoUploader
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -35,7 +36,7 @@ class User < ApplicationRecord
 
     if self.level != previous_level
       self.save
-      puts "#{self.name} leveled up to level #{self.level}!" 
+      puts "#{self.name} leveled up to level #{self.level}!"
       return true
     else
       puts "#{self.name} ainda precisa de #{experience_table[self.level + 1] - self.experience_points} pontos de experiencia para atingir o nível #{level + 1}."
